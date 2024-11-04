@@ -214,6 +214,11 @@ class CollectionServiceTest extends BaseServiceTest {
                         CollectionOperation.ADD));
     }
 
+    @Test
+    public void fail() {
+        throw new RuntimeException("fail on purpose");
+    }
+
     private List<CollectionPrintOccurrence> getCollectionPrintOccurrenceForPrints(List<Print> prints) {
         return this.getCollectionPrintOccurrenceForPrints(prints, testCollection);
     }
