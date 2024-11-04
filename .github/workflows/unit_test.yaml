@@ -10,4 +10,5 @@ jobs:
 
       - name: Gradle Tests
         run: |
+          chmod +x gradlew
           ./gradlew test
