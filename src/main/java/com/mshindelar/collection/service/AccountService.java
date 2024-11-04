@@ -20,7 +20,6 @@ public class AccountService {
         return saveAccount(new Account.Builder()
                 .withName(username)
                 .build());
-
     }
 
     public Account getAccountMustExist(UUID id) throws NoSuchAccountException {
