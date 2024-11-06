@@ -256,7 +256,7 @@ public class CollectionService {
     private void validateGrade(Condition condition, int grade) throws InvalidCollectionItemException {
         if (condition.equals(Condition.GRADE) && grade < 1) {
             throw new InvalidCollectionItemException("Cannot set condition to grade without providing a grade value");
-        } else if (!condition.equals(Condition.GRADE) && grade != -1) {
+        } else if (!condition.equals(Condition.GRADE) && grade > 0) {
             throw new InvalidCollectionItemException("Cannot set grade value if condition is not grade");
         }
     }

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Getter
@@ -19,4 +20,21 @@ public class CollectionDto {
     private String name;
     private CollectionSettings collectionSettings;
     private List<CollectionCardDto> collectionItems;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CollectionDto that = (CollectionDto) o;
+        return id.equals(that.id) &&
+                ownerId.equals(that.ownerId) &&
+                name.equals(that.name) &&
+                collectionSettings.equals(that.collectionSettings) &&
+                collectionItems.equals(that.collectionItems);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, ownerId, name, collectionSettings, collectionItems);
+    }
 }

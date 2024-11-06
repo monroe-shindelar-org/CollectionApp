@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Objects;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -19,4 +21,25 @@ public class YGOCardDto extends CardDto {
     private String description;
     private int attack;
     private int defense;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        YGOCardDto that = (YGOCardDto) o;
+        return level == that.level &&
+                attack == that.attack &&
+                defense == that.defense &&
+                type.equals(that.type) &&
+                race.equals(that.race) &&
+                archetype.equals(that.archetype) &&
+                attribute == that.attribute &&
+                description.equals(that.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), type, level, race, archetype, attribute, description, attack, defense);
+    }
 }

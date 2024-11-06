@@ -75,6 +75,7 @@ CREATE TABLE IF NOT EXISTS collection_print (
 
 CREATE UNIQUE INDEX card_print_idx ON collection_print (collection_card_id, print_id, print_set_rarity_code);
 
+-- TODO:// GRADING AUTHORITY (PSA, etc.)
 CREATE TABLE IF NOT EXISTS collection_print_occurrence (
    collection_print_id  UUID NOT NULL REFERENCES collection_print (id),
    condition            TEXT NOT NULL,

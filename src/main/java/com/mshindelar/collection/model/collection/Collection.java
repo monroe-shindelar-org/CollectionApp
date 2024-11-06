@@ -12,7 +12,6 @@ import lombok.Setter;
 import org.modelmapper.ModelMapper;
 
 import java.io.Serializable;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -39,17 +38,21 @@ public class Collection implements Serializable, DaoConverter<CollectionDto> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Collection that = (Collection) o;
-        return id.equals(that.id) && owner.equals(that.owner) && name.equals(that.name) && settings.equals(that.settings);
+        return id.equals(that.id) &&
+                owner.getId().equals(that.owner.getId()) &&
+                name.equals(that.name) &&
+                settings.equals(that.settings);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, owner, name, settings);
+        return Objects.hash(id, owner.getId(), name, settings);
     }
 
     @Override
     public CollectionDto convertToDto(ModelMapper modelMapper) {
         CollectionDto dto = new CollectionDto();
+        dto.setId(this.getId());
         dto.setName(this.getName());
         dto.setOwnerId(this.getOwner().getId());
         dto.setCollectionSettings(this.getSettings());

@@ -11,11 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.LinkedList;
 import java.util.List;
 
-@SpringBootTest
-@AutoConfigureMockMvc
 class CollectionServiceTest extends BaseServiceTest {
 
 
@@ -212,11 +209,6 @@ class CollectionServiceTest extends BaseServiceTest {
                 () -> this.collectionService.modifyCollectionItem(testCollection.getId(), megalo.getId(),
                         megalo.getSetRarityCode(), Condition.GRADE, Edition.FIRST, -1, 3,
                         CollectionOperation.ADD));
-    }
-
-    @Test
-    public void fail() {
-        throw new RuntimeException("fail on purpose");
     }
 
     private List<CollectionPrintOccurrence> getCollectionPrintOccurrenceForPrints(List<Print> prints) {

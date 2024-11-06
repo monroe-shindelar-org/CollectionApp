@@ -4,7 +4,6 @@ import com.mshindelar.collection.dto.collection.CollectionDto;
 import com.mshindelar.collection.exception.NoSuchAccountException;
 import com.mshindelar.collection.exception.NoSuchCardException;
 import com.mshindelar.collection.exception.NoSuchCollectionException;
-import com.mshindelar.collection.model.card.Print;
 import com.mshindelar.collection.model.collection.Collection;
 import com.mshindelar.collection.model.collection.CollectionPrintOccurrence;
 import com.mshindelar.collection.model.collection.request.CollectionCardRequestItem;
@@ -17,9 +16,11 @@ import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
 import java.util.List;
@@ -45,8 +46,13 @@ public class CollectionController {
             throws NoSuchAccountException, NoSuchCollectionException {
         //Do some validation
 
-        Collection collection = this.collectionService.getCollection(id);
-        return collection.convertToDto(modelMapper);
+        try {
+            Collection collection = this.collectionService.getCollection(id);
+            return collection.convertToDto(modelMapper);
+        } catch (NoSuchCollectionException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    String.format("Cannot find collection with id %s", id));
+        }
     }
 
     @PutMapping("/{id}/items")
@@ -54,8 +60,19 @@ public class CollectionController {
                                      @RequestBody List<CollectionCardRequestItem> items,
                                      @RequestParam(required = false, defaultValue = "false") boolean ignoreFailure)
             throws NoSuchCollectionException {
-        List<CollectionPrintOccurrence> occurrences = getOccurrences(id, items, CollectionOperation.ADD, ignoreFailure);
-        this.collectionService.updateItemsInCollection(occurrences);
+        try {
+            List<CollectionPrintOccurrence> occurrences = getOccurrences(id, items, CollectionOperation.ADD, ignoreFailure);
+            this.collectionService.updateItemsInCollection(occurrences);
+        } catch (RuntimeException e) {
+            if (e.getCause() instanceof NoSuchCardException) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unable to find card", e);
+            } else if (e.getCause() instanceof NoSuchCollectionException) {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                        String.format("Unable to find collection with id %s", id));
+            } else {
+                throw e;
+            }
+        }
     }
 
     @DeleteMapping("/{id}/items")

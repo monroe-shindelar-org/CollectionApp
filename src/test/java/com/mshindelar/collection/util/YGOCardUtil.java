@@ -1,4 +1,4 @@
-package com.mshindelar.collection.service.util;
+package com.mshindelar.collection.util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -18,6 +18,7 @@ public class YGOCardUtil {
             "            \"humanReadableCardType\": \"Equip Spell\",\n" +
             "            \"frameType\": \"spell\",\n" +
             "            \"race\": \"Equip\",\n" +
+            "            \"desc\": \"\",\n" +
             "            \"archetype\": \"Mermail\",\n" +
             "            \"ygoprodeck_url\": \"https://ygoprodeck.com/card/abyss-scale-of-cetus-1687\",\n" +
             "            \"card_sets\": [\n" +
@@ -54,6 +55,7 @@ public class YGOCardUtil {
             "            \"humanReadableCardType\": \"Equip Spell\",\n" +
             "            \"frameType\": \"spell\",\n" +
             "            \"race\": \"Equip\",\n" +
+            "            \"desc\": \"\",\n" +
             "            \"archetype\": \"Mermail\",\n" +
             "            \"ygoprodeck_url\": \"https://ygoprodeck.com/card/abyss-scale-of-the-kraken-740\",\n" +
             "            \"card_sets\": [\n" +
@@ -90,6 +92,7 @@ public class YGOCardUtil {
             "            \"humanReadableCardType\": \"Equip Spell\",\n" +
             "            \"frameType\": \"spell\",\n" +
             "            \"race\": \"Equip\",\n" +
+            "            \"desc\": \"\",\n" +
             "            \"archetype\": \"Mermail\",\n" +
             "            \"ygoprodeck_url\": \"https://ygoprodeck.com/card/abyss-scale-of-the-mizuchi-6124\",\n" +
             "            \"card_sets\": [\n" +
@@ -133,6 +136,7 @@ public class YGOCardUtil {
             "            \"humanReadableCardType\": \"Normal Trap\",\n" +
             "            \"frameType\": \"trap\",\n" +
             "            \"race\": \"Normal\",\n" +
+            "            \"desc\": \"\",\n" +
             "            \"archetype\": \"Mermail\",\n" +
             "            \"ygoprodeck_url\": \"https://ygoprodeck.com/card/abyss-scorn-6649\",\n" +
             "            \"card_sets\": [\n" +
@@ -169,6 +173,7 @@ public class YGOCardUtil {
             "            \"humanReadableCardType\": \"Continuous Trap\",\n" +
             "            \"frameType\": \"trap\",\n" +
             "            \"race\": \"Continuous\",\n" +
+            "            \"desc\": \"\",\n" +
             "            \"archetype\": \"Mermail\",\n" +
             "            \"ygoprodeck_url\": \"https://ygoprodeck.com/card/abyss-sphere-5107\",\n" +
             "            \"card_sets\": [\n" +
@@ -212,6 +217,7 @@ public class YGOCardUtil {
             "            \"humanReadableCardType\": \"Normal Trap\",\n" +
             "            \"frameType\": \"trap\",\n" +
             "            \"race\": \"Normal\",\n" +
+            "            \"desc\": \"\",\n" +
             "            \"archetype\": \"Mermail\",\n" +
             "            \"ygoprodeck_url\": \"https://ygoprodeck.com/card/abyss-squall-2949\",\n" +
             "            \"card_sets\": [\n" +
@@ -253,6 +259,7 @@ public class YGOCardUtil {
             "            \"humanReadableCardType\": \"Link Effect Monster\",\n" +
             "            \"frameType\": \"link\",\n" +
             "            \"race\": \"Sea Serpent\",\n" +
+            "            \"desc\": \"\",\n" +
             "            \"atk\": 1600,\n" +
             "            \"def\": null,\n" +
             "            \"level\": 0,\n" +
@@ -309,6 +316,7 @@ public class YGOCardUtil {
             "            \"humanReadableCardType\": \"Effect Monster\",\n" +
             "            \"frameType\": \"effect\",\n" +
             "            \"race\": \"Aqua\",\n" +
+            "            \"desc\": \"\",\n" +
             "            \"atk\": 2500,\n" +
             "            \"def\": 2000,\n" +
             "            \"level\": 7,\n" +
@@ -367,6 +375,7 @@ public class YGOCardUtil {
             "            \"humanReadableCardType\": \"Effect Monster\",\n" +
             "            \"frameType\": \"effect\",\n" +
             "            \"race\": \"Aqua\",\n" +
+            "            \"desc\": \"\",\n" +
             "            \"atk\": 1000,\n" +
             "            \"def\": 200,\n" +
             "            \"level\": 3,\n" +
@@ -412,6 +421,7 @@ public class YGOCardUtil {
             "            \"humanReadableCardType\": \"Xyz Effect Monster\",\n" +
             "            \"frameType\": \"xyz\",\n" +
             "            \"race\": \"Aqua\",\n" +
+            "            \"desc\": \"\",\n" +
             "            \"atk\": 2800,\n" +
             "            \"def\": 1600,\n" +
             "            \"level\": 7,\n" +
@@ -463,6 +473,7 @@ public class YGOCardUtil {
             "            \"humanReadableCardType\": \"Effect Monster\",\n" +
             "            \"frameType\": \"effect\",\n" +
             "            \"race\": \"Aqua\",\n" +
+            "            \"desc\": \"\",\n" +
             "            \"atk\": 1400,\n" +
             "            \"def\": 800,\n" +
             "            \"level\": 3,\n" +
@@ -514,6 +525,7 @@ public class YGOCardUtil {
             "            \"humanReadableCardType\": \"Effect Monster\",\n" +
             "            \"frameType\": \"effect\",\n" +
             "            \"race\": \"Aqua\",\n" +
+            "            \"desc\": \"\",\n" +
             "            \"atk\": 1300,\n" +
             "            \"def\": 400,\n" +
             "            \"level\": 3,\n" +
@@ -558,6 +570,7 @@ public class YGOCardUtil {
             "            \"humanReadableCardType\": \"Effect Monster\",\n" +
             "            \"frameType\": \"effect\",\n" +
             "            \"race\": \"Sea Serpent\",\n" +
+            "            \"desc\": \"\",\n" +
             "            \"atk\": 2700,\n" +
             "            \"def\": 1000,\n" +
             "            \"level\": 7,\n" +
@@ -609,6 +622,7 @@ public class YGOCardUtil {
             "            \"humanReadableCardType\": \"Effect Monster\",\n" +
             "            \"frameType\": \"effect\",\n" +
             "            \"race\": \"Aqua\",\n" +
+            "            \"desc\": \"\",\n" +
             "            \"atk\": 1500,\n" +
             "            \"def\": 1200,\n" +
             "            \"level\": 3,\n" +
@@ -660,6 +674,7 @@ public class YGOCardUtil {
             "            \"humanReadableCardType\": \"Effect Monster\",\n" +
             "            \"frameType\": \"effect\",\n" +
             "            \"race\": \"Fish\",\n" +
+            "            \"desc\": \"\",\n" +
             "            \"atk\": 1200,\n" +
             "            \"def\": 1800,\n" +
             "            \"level\": 4,\n" +
@@ -704,6 +719,7 @@ public class YGOCardUtil {
             "            \"humanReadableCardType\": \"Effect Monster\",\n" +
             "            \"frameType\": \"effect\",\n" +
             "            \"race\": \"Fish\",\n" +
+            "            \"desc\": \"\",\n" +
             "            \"atk\": 100,\n" +
             "            \"def\": 2000,\n" +
             "            \"level\": 4,\n" +
@@ -748,6 +764,7 @@ public class YGOCardUtil {
             "            \"humanReadableCardType\": \"Effect Monster\",\n" +
             "            \"frameType\": \"effect\",\n" +
             "            \"race\": \"Sea Serpent\",\n" +
+            "            \"desc\": \"\",\n" +
             "            \"atk\": 2400,\n" +
             "            \"def\": 1900,\n" +
             "            \"level\": 7,\n" +
@@ -820,6 +837,7 @@ public class YGOCardUtil {
             "            \"humanReadableCardType\": \"Effect Monster\",\n" +
             "            \"frameType\": \"effect\",\n" +
             "            \"race\": \"Aqua\",\n" +
+            "            \"desc\": \"\",\n" +
             "            \"atk\": 1200,\n" +
             "            \"def\": 2000,\n" +
             "            \"level\": 3,\n" +
@@ -871,6 +889,7 @@ public class YGOCardUtil {
             "            \"humanReadableCardType\": \"Effect Monster\",\n" +
             "            \"frameType\": \"effect\",\n" +
             "            \"race\": \"Fish\",\n" +
+            "            \"desc\": \"\",\n" +
             "            \"atk\": 1500,\n" +
             "            \"def\": 1500,\n" +
             "            \"level\": 4,\n" +
@@ -915,6 +934,7 @@ public class YGOCardUtil {
             "            \"humanReadableCardType\": \"Effect Monster\",\n" +
             "            \"frameType\": \"effect\",\n" +
             "            \"race\": \"Aqua\",\n" +
+            "            \"desc\": \"\",\n" +
             "            \"atk\": 1100,\n" +
             "            \"def\": 1900,\n" +
             "            \"level\": 3,\n" +
@@ -966,6 +986,7 @@ public class YGOCardUtil {
             "            \"humanReadableCardType\": \"Effect Monster\",\n" +
             "            \"frameType\": \"effect\",\n" +
             "            \"race\": \"Fish\",\n" +
+            "            \"desc\": \"\",\n" +
             "            \"atk\": 1600,\n" +
             "            \"def\": 800,\n" +
             "            \"level\": 4,\n" +
@@ -1017,6 +1038,7 @@ public class YGOCardUtil {
             "            \"humanReadableCardType\": \"Effect Monster\",\n" +
             "            \"frameType\": \"effect\",\n" +
             "            \"race\": \"Aqua\",\n" +
+            "            \"desc\": \"\",\n" +
             "            \"atk\": 1700,\n" +
             "            \"def\": 2400,\n" +
             "            \"level\": 7,\n" +
@@ -1083,6 +1105,7 @@ public class YGOCardUtil {
             "            \"humanReadableCardType\": \"Xyz Effect Monster\",\n" +
             "            \"frameType\": \"xyz\",\n" +
             "            \"race\": \"Sea Serpent\",\n" +
+            "            \"desc\": \"\",\n" +
             "            \"atk\": 1600,\n" +
             "            \"def\": 2800,\n" +
             "            \"level\": 3,\n" +
@@ -1132,6 +1155,7 @@ public class YGOCardUtil {
             "            \"level\": 4,\n" +
             "            \"attribute\": \"WATER\",\n" +
             "            \"archetype\": \"Mermail\",\n" +
+            "            \"desc\": \"\",\n" +
             "            \"ygoprodeck_url\": \"https://ygoprodeck.com/card/mermail-abyssturge-1902\",\n" +
             "            \"card_sets\": [\n" +
             "                {\n" +
