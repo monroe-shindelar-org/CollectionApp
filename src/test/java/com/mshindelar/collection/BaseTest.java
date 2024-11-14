@@ -2,6 +2,7 @@ package com.mshindelar.collection;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mshindelar.collection.exception.NoSuchCollectionException;
 import com.mshindelar.collection.model.Account;
 import com.mshindelar.collection.model.card.CardFranchise;
 import com.mshindelar.collection.model.collection.Collection;
@@ -10,6 +11,7 @@ import com.mshindelar.collection.service.AccountService;
 import com.mshindelar.collection.service.CardService;
 import com.mshindelar.collection.service.CollectionService;
 import com.mshindelar.collection.util.YGOCardUtil;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,5 +45,10 @@ public class BaseTest {
         CollectionSettings settings = CollectionSettings.withDefaults(CardFranchise.YGO);
         testCollection = this.collectionService.createNewCollection(
                 "testCollection", settings, testAccount);
+    }
+
+    @AfterEach
+    public void afterEach() throws NoSuchCollectionException {
+        this.collectionService.deleteCollection(testCollection.getId());
     }
 }

@@ -201,7 +201,6 @@ public class CollectionControllerTest extends BaseContollerTest {
 
         Assertions.assertNotNull(cards);
         Assertions.assertEquals(4, cards.size());
-
     }
 
     @Test

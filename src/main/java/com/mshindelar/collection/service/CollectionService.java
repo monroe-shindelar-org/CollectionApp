@@ -157,7 +157,8 @@ public class CollectionService {
         return collectionCardRepository.findAll(new CollectionCardSpecification(filter));
     }
 
-    public void getCollectionPrintsByFilter(AbstractFilter filter) {
+    public void deleteCollection(UUID id) throws NoSuchCollectionException {
+        this.collectionRepository.delete(this.getCollection(id));
     }
 
     private CollectionCard getCollectionCard(Collection collection, Card card) throws NoSuchCollectionException {

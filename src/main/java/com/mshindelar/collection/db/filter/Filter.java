@@ -30,8 +30,10 @@ public class Filter {
     }
 
     private Object convertValue(Object value) {
-        switch (this.getFormat()) {
-            case DATE -> value = stringToDate((String) value);
+        if (this.getFormat() != null) {
+            switch (this.getFormat()) {
+                case DATE -> value = stringToDate((String) value);
+            }
         }
 
         return value;

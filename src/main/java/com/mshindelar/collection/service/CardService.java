@@ -93,10 +93,12 @@ public class CardService {
             card.setPrints(prints);
         }
 
-        MiscCardInfoDto misc = dto.getMiscInfo().getFirst();
-        card.setTcgRelease(misc.getTcgDate());
-        card.setOcgRelease(misc.getOcgDate());
-        card.setHasEffect(misc.isHasEffect());
+        if (dto.getMiscInfo() != null && dto.getMiscInfo().getFirst() != null) {
+            MiscCardInfoDto misc = dto.getMiscInfo().getFirst();
+            card.setTcgRelease(misc.getTcgDate());
+            card.setOcgRelease(misc.getOcgDate());
+            card.setHasEffect(misc.isHasEffect());
+        }
 
         return card;
     }
