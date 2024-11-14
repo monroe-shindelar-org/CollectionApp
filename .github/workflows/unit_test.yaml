@@ -8,17 +8,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Setup Java
+      - name: Setup Java for ${{ runner.arch }}
         uses: actions/setup-java@v3
         with:
           java-version: 21
           distribution: temurin
-          architecture: x64
+          architecture: ${{ runner.arch }}
 
-#      - name: Setup Gradle
-#        uses: gradle/actions/setup-gradle@af1da67850ed9a4cedd57bfd976089dd991e2582
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@af1da67850ed9a4cedd57bfd976089dd991e2582
 
       - name: Gradle Build
-        run: |
-          chmod +x gradlew
-          ./gradlew build
+        run: gradle build
