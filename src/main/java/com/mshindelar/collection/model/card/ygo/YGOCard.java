@@ -5,10 +5,7 @@ import com.mshindelar.collection.dto.card.YGOCardDto;
 import com.mshindelar.collection.model.card.Card;
 import com.mshindelar.collection.model.card.Print;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.modelmapper.ModelMapper;
 
 import java.util.Date;
@@ -18,8 +15,7 @@ import java.util.List;
 @Table(name = "card")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorValue("YGO")
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class YGOCard extends Card {

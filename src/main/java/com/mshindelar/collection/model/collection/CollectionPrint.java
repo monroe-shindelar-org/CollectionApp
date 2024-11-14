@@ -18,7 +18,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-//@Table(name = "collection_print")
+@Table(name = "collection_print")
 public class CollectionPrint implements Serializable, DaoConverter<CollectionPrintDto> {
     @Id
     @GeneratedValue
