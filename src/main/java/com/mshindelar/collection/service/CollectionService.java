@@ -1,6 +1,6 @@
 package com.mshindelar.collection.service;
 
-import com.mshindelar.collection.YGOPROApi.YGOPROApiClient;
+import com.YGOPRODeck.YGOPRODeckApiClient.YGOPRODeckApiClient;
 import com.mshindelar.collection.db.filter.AbstractFilter;
 import com.mshindelar.collection.exception.InvalidCollectionItemException;
 import com.mshindelar.collection.exception.NoSuchAccountException;
@@ -31,7 +31,7 @@ public class CollectionService {
     private static Logger LOGGER = LoggerFactory.getLogger(CollectionService.class);
 
     @Autowired
-    private YGOPROApiClient ygoproApiClient;
+    private YGOPRODeckApiClient ygoproApiClient;
     @Autowired
     private CollectionRepository collectionRepository;
     @Autowired

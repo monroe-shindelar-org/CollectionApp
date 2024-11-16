@@ -1,6 +1,6 @@
 package com.mshindelar.collection.model.card.ygo;
 
-import com.mshindelar.collection.YGOPROApi.dto.Attribute;
+import com.YGOPRODeck.YGOPRODeckApiClient.model.Attribute;
 import com.mshindelar.collection.dto.card.YGOCardDto;
 import com.mshindelar.collection.model.card.Card;
 import com.mshindelar.collection.model.card.Print;

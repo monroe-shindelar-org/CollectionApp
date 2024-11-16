@@ -1,8 +1,7 @@
 package com.mshindelar.collection.service;
 
-import com.mshindelar.collection.YGOPROApi.YGOPROApiClient;
-import com.mshindelar.collection.YGOPROApi.dto.MiscCardInfoDto;
-import com.mshindelar.collection.YGOPROApi.dto.YGOCardDto;
+import com.YGOPRODeck.YGOPRODeckApiClient.model.MiscCardInfoDto;
+import com.YGOPRODeck.YGOPRODeckApiClient.model.YGOPRODeckCardDto;
 import com.mshindelar.collection.exception.NoSuchCardException;
 import com.mshindelar.collection.model.card.Card;
 import com.mshindelar.collection.model.card.Print;
@@ -24,7 +23,7 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
-
+import com.YGOPRODeck.YGOPRODeckApiClient.YGOPRODeckApiClient;
 @Service
 public class CardService {
     private static final Logger LOGGER = LoggerFactory.getLogger(CardService.class);
@@ -34,15 +33,16 @@ public class CardService {
     private CardRepository cardRepository;
     @Autowired
     private PrintRepository printRepository;
+
     @Autowired
-    private YGOPROApiClient ygoproApiClient;
+    private YGOPRODeckApiClient ygoproDeckApiClient;
 
 //    @Scheduled(cron = "0 * * * * *")
     @Scheduled(cron = "0 0 23 * * SUN")
     @Async
     public void refreshDatabase() throws IOException {
         LOGGER.info("Refreshing database with cards from YGOPRODeck");
-        List<YGOCardDto> cards = this.ygoproApiClient.getCards();
+        List<YGOPRODeckCardDto> cards = this.ygoproDeckApiClient.getCards();
         this.saveCards(cards);
         LOGGER.info("Database successfully refreshed with {} cards",  cards.size());
     }
@@ -74,7 +74,7 @@ public class CardService {
                         setCode, rarityCode)));
     }
 
-    public void saveCards(List<YGOCardDto> cards) {
+    public void saveCards(List<YGOPRODeckCardDto> cards) {
         List<YGOCard> cardss = cards.stream()
                 .map(this::fromDto)
                 .collect(Collectors.toList());
@@ -82,7 +82,7 @@ public class CardService {
         cardRepository.saveAll(cardss);
     }
 
-    private YGOCard fromDto(YGOCardDto dto) {
+    private YGOCard fromDto(YGOPRODeckCardDto dto) {
         YGOCard card = modelMapper.map(dto, YGOCard.class);
 
         if (dto.getCardSets() != null) {

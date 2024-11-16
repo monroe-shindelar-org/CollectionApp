@@ -19,6 +19,8 @@ repositories {
 }
 
 dependencies {
+	implementation files("libs/YGOPRODeckApiClient-1.0-SNAPSHOT.jar")
+
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation group: 'org.springframework', name: 'spring-jdbc', version: '6.1.14'
 	implementation 'org.flywaydb:flyway-core'
