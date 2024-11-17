@@ -5,6 +5,7 @@ on:
 
 jobs:
   docker:
+    name: Docker Publish
     runs-on: self-hosted
     steps:
       - name: Checkout
