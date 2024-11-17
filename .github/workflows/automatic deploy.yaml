@@ -1,0 +1,13 @@
+name: Deploy
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: self-hosted
+    steps:
+      - name: Build and Publish
+        uses: .github/workflows/docker_publish.yaml
