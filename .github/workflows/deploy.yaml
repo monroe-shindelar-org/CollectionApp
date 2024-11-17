@@ -1,7 +1,17 @@
 name: Deploy
 on:
   workflow_call:
+    inputs:
+      ref:
+        description: "Git ref to build deploy"
+        type: string
+        default: "main"
   workflow_dispatch:
+    inputs:
+      ref:
+        description: "Git ref to build deploy"
+        type: string
+        required: false
 
 jobs:
   build_and_publish:

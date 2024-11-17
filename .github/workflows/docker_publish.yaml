@@ -1,7 +1,17 @@
 name: Docker Publish
 on:
   workflow_call:
+    inputs:
+      ref:
+        description: "Git ref to build"
+        type: string
+        default: "main"
   workflow_dispatch:
+    inputs:
+      ref:
+        description: "Git ref to build"
+        type: string
+        required: false
 
 jobs:
   docker:
@@ -10,6 +20,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          ref: ${{ inputs.ref || github.ref }}
 
       - name: Setup Java for ${{ runner.arch }}
         uses: actions/setup-java@v3
@@ -45,10 +57,14 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and push
+      - name: Build and Push
         uses: docker/build-push-action@v6
         with:
           context: .
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           annotations: ${{ steps.meta.outputs.annotations }}
+
+      - name: Output Version
+        id: output_version
+        run: echo "version=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.version'] }}" >> "$GITHUB_OUTPUT"
