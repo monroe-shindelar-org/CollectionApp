@@ -23,7 +23,7 @@ jobs:
           images: monroeshindelar/collection
           tags: |
             type=ref,event=branch
-            type=sha,
+            type=sha
 
       - name: Login to Docker Hub
         uses: docker/login-action@v3
