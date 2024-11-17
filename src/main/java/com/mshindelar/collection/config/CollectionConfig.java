@@ -1,5 +1,6 @@
 package com.mshindelar.collection.config;
 
+import com.YGOPRODeck.YGOPRODeckApiClient.YGOPRODeckApiClient;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
@@ -20,4 +21,9 @@ public class CollectionConfig {
 
     @Bean
     public ModelMapper modelMapper() { return new ModelMapper(); }
+
+    @Bean
+    public YGOPRODeckApiClient ygoproDeckApiClient(HttpClient httpClient, ObjectMapper objectMapper) {
+        return new YGOPRODeckApiClient(httpClient, objectMapper);
+    }
 }

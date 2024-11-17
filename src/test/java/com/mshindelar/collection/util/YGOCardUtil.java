@@ -1,10 +1,10 @@
 package com.mshindelar.collection.util;
 
+import com.YGOPRODeck.YGOPRODeckApiClient.model.YGOPRODeckCardDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mshindelar.collection.YGOPROApi.dto.YGOCardDto;
 
 import java.util.List;
 
@@ -1187,10 +1187,10 @@ public class YGOCardUtil {
             "    ]\n" +
             "}";
 
-    public static List<YGOCardDto> getTestCards(ObjectMapper mapper) throws JsonProcessingException {
+    public static List<YGOPRODeckCardDto> getTestCards(ObjectMapper mapper) throws JsonProcessingException {
         JsonNode node = mapper.readTree(PAYLOAD);
         String json = node.get("data").toString();
         return mapper.readValue(json,
-                new TypeReference<List<com.mshindelar.collection.YGOPROApi.dto.YGOCardDto>>() {});
+                new TypeReference<List<com.YGOPRODeck.YGOPRODeckApiClient.model.YGOPRODeckCardDto>>() {});
     }
 }

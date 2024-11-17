@@ -12,5 +12,4 @@ import java.util.UUID;
 @Repository
 public interface CollectionRepository extends CrudRepository<Collection, UUID> {
     Optional<Collection> findByNameAndOwner(String name, Account owner);
-//    List<Collection> findAllByOwner(UUID owner);
 }

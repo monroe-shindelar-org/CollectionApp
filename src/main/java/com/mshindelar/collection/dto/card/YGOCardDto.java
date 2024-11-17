@@ -1,6 +1,6 @@
 package com.mshindelar.collection.dto.card;
 
-import com.mshindelar.collection.YGOPROApi.dto.Attribute;
+import com.YGOPRODeck.YGOPRODeckApiClient.model.Attribute;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,6 +21,10 @@ public class YGOCardDto extends CardDto {
     private String description;
     private int attack;
     private int defense;
+
+    private int scale;
+
+    private int linkValue;
 
     @Override
     public boolean equals(Object o) {
