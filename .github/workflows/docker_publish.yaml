@@ -5,10 +5,24 @@ on:
 
 jobs:
   docker:
+    name: Docker Publish
     runs-on: self-hosted
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
+      - name: Setup Java for ${{ runner.arch }}
+        uses: actions/setup-java@v3
+        with:
+          java-version: 21
+          distribution: temurin
+          architecture: ${{ runner.arch.lowercase }}
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@af1da67850ed9a4cedd57bfd976089dd991e2582
+
+      - name: Gradle Jar
+        run: ./gradlew bootJar
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -16,14 +30,14 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Docker meta
+      - name: Docker Metadata
         id: meta
         uses: docker/metadata-action@v5
         with:
           images: monroeshindelar/collection
           tags: |
-            type=ref,event=branch
-            type=sha
+            type=semver,pattern={{version}},enabled={{ github.ref_type == 'tag' }}
+            type=sha,prefix={{branch}}-
 
       - name: Login to Docker Hub
         uses: docker/login-action@v3
