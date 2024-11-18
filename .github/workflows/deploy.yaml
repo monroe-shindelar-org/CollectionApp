@@ -18,3 +18,7 @@ jobs:
     name: "Build and Publish"
     uses: ./.github/workflows/docker_publish.yaml
     secrets: inherit
+
+  generate_manifest:
+    name: Generate Manifest
+    uses: ./.github/actions/setup_jkcfg

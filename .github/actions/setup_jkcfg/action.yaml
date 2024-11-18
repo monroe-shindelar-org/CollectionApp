@@ -1,0 +1,19 @@
+  name: Setup JKCFG
+  description: Sets up JKCFG for kubernetes manifest generation
+  runs:
+    using: composite
+    steps:
+      - name: Checkout Deploy Repo
+        uses: actions/checkout@v3
+        with:
+          repository: monroe-shindelar-org/k8s-deploy
+          path: "./k8s_deploy"
+          ssh-key: ${{ inputs.repo_access_token }}
+          ssh-known-hosts: "github.com"
+          ssh-strict: false
+
+      - name: Install JKCFG
+        shell: bash
+        run: |
+          curl -Lo jk https://github.com/jkcfg/jk/releases/download/0.4.0/jk-darwin-${{ runner.arch.lowercase }}
+          chmod +x jk
