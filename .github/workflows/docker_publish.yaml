@@ -1,17 +1,6 @@
 name: Docker Publish
 on:
   workflow_call:
-    inputs:
-      ref:
-        description: "Git ref to build"
-        type: string
-        default: "main"
-  workflow_dispatch:
-    inputs:
-      ref:
-        description: "Git ref to build"
-        type: string
-        required: false
 
 jobs:
   docker:
@@ -20,11 +9,6 @@ jobs:
     outputs:
       version: ${{ steps.output_version.outputs.version }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          ref: ${{ inputs.ref || github.ref }}
-
       - name: Setup Java for ${{ runner.arch }}
         uses: actions/setup-java@v3
         with:
