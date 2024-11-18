@@ -15,6 +15,9 @@ jobs:
       - name: Build and Publish
         id: build_and_publish
         uses: ./.github/actions/docker_build_and_publish
+        with:
+          dockerhub_user: ${{ secrets.DOCKERHUB_USER }}
+          dockerhub_token: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Deploy
         uses: ./.github/actions/generate_manifest
