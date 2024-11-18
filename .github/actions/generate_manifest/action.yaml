@@ -1,5 +1,9 @@
   name: Generate Manifest
-  description:
+  description: Generate's k8s manifest
+  inputs:
+    version:
+      description: Version
+      required: true
   runs:
     using: composite
     steps:
@@ -17,3 +21,8 @@
         run: |
           curl -Lo jk https://github.com/jkcfg/jk/releases/download/0.4.0/jk-darwin-${{ runner.arch.lowercase }}
           chmod +x jk
+
+      - name: Generate
+        shell: bash
+        run: |
+          ./jk run deploy/kube/collection.js -o deploy/kube -f $file -p version=${{ inputs.version }}

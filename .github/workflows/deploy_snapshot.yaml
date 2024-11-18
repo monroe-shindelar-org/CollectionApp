@@ -16,3 +16,5 @@ jobs:
 
       - name: Generate Manifest
         using: ./.github/actions/generate_manifest
+        with:
+          version: ${{ inputs.version }}
