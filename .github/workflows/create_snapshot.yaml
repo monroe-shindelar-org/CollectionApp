@@ -1,0 +1,20 @@
+name: Create Snapshot
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "Git ref to build"
+        type: string
+        required: false
+
+jobs:
+  create_snapshot:
+    name: Create Snapshot
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ inputs.ref || github.ref }}
+
+      - name: Build and Publish
+        uses: ./.github/workflows/docker_publish.yaml

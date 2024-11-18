@@ -1,16 +1,14 @@
 name: Docker Publish
 on:
   workflow_call:
-  workflow_dispatch:
 
 jobs:
   docker:
     name: Docker Publish
     runs-on: self-hosted
+    outputs:
+      version: ${{ steps.output_version.outputs.version }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
       - name: Setup Java for ${{ runner.arch }}
         uses: actions/setup-java@v3
         with:
@@ -45,10 +43,14 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and push
+      - name: Build and Push
         uses: docker/build-push-action@v6
         with:
           context: .
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           annotations: ${{ steps.meta.outputs.annotations }}
+
+      - name: Output Version
+        id: output_version
+        run: echo "version=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.version'] }}" >> "$GITHUB_OUTPUT"
