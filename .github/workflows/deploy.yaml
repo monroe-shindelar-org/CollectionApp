@@ -21,4 +21,4 @@ jobs:
 
   generate_manifest:
     name: Generate Manifest
-    uses: ./.github/actions/setup_jkcfg
+    uses: ./.github/actions/generate_manifest
