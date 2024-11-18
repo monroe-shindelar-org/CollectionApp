@@ -9,5 +9,11 @@ jobs:
     name: Deploy
     runs-on: self-hosted
     steps:
+      - name: Build and Publish
+        id: build_and_publish
+        uses: ./.github/workflows/docker_publish.yaml
+
       - name: Deploy
         uses: ./.github/workflows/deploy.yaml
+        with:
+          version: ${{ steps.build_and_publish.outputs.version }}

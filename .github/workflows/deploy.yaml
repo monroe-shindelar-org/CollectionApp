@@ -2,23 +2,19 @@ name: Deploy
 on:
   workflow_call:
     inputs:
-      ref:
-        description: "Git ref to build deploy"
+      version:
+        description: "Version to deploy"
         type: string
-        default: "main"
   workflow_dispatch:
     inputs:
-      ref:
-        description: "Git ref to build deploy"
+      version:
+        description: "Version to deploy"
         type: string
         required: false
 
 jobs:
-  build_and_publish:
-    name: "Build and Publish"
-    uses: ./.github/workflows/docker_publish.yaml
-    secrets: inherit
-
   generate_manifest:
     name: Generate Manifest
     uses: ./.github/actions/generate_manifest
+    with:
+      version: ${{ inputs.version }}
