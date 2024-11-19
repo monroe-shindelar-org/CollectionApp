@@ -188,7 +188,7 @@ const cmService = new k8s.core.v1.ConfigMap(appName + '-cm', {
     }
 });
 
-const cmDb = new k8s.core.v1.ConfigMap(appName + 'psql-cm', {
+const cmDb = new k8s.core.v1.ConfigMap(appName + '-psql-cm', {
     metadata: {
         labels: labels,
         namespace: namespace
