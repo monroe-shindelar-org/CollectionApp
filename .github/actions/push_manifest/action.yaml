@@ -1,5 +1,9 @@
 name: Push Manifest
 description:
+inputs:
+  repo_access_token:
+    description: Token to access deployment repository
+    required: true
 runs:
   using: composite
   steps:
@@ -8,7 +12,7 @@ runs:
       with:
         repository: monroeshindelar/kubernetes-manifests
         path: "./kubernetes-manifests"
-        ssh-key: ""
+        ssh-key: ${{ inputs.repo_access_token }}
         ssh-known-hosts: "github.com"
         ssh-strict: false
 
