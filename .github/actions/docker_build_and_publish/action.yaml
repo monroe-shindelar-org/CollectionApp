@@ -7,6 +7,10 @@ inputs:
   dockerhub_token:
     description: Dockerhub token
     required: true
+outputs:
+  version:
+    description: Version published to docker
+    value: ${{ steps.output_version.outputs.version }}
 runs:
   using: composite
   steps:
