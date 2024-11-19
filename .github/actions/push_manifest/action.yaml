@@ -30,6 +30,6 @@ runs:
         while [ $retries -lt 5 ]; do
           git pull --rebase
           git push
-          [[ $? == 0 ]] && break  (( retries++ ));
+          [[ $? == 0 ]] && break || (( retries++ ));
         done
         exit $?
