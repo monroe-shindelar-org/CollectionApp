@@ -1,0 +1,30 @@
+name: Push Manifest
+description:
+runs:
+  using: composite
+  steps:
+    - name: Checkout Deploy Repo
+      uses: actions/checkout@v3
+      with:
+        repository: monroeshindelar/kubernetes-manifests
+        path: "./kubernetes-manifests"
+        ssh-key: ""
+        ssh-known-hosts: "github.com"
+        ssh-strict: false
+
+    - name: Push
+      shell: bash
+      run: |
+        cp -r ./deploy/kube/manifests/* ./kubernetes-manifests
+        cd ./kubernetes-manifests
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add --A
+        git commit -m "[Automated commit from $GITHUB_REPOSITORY]" || echo "No changes to commit"
+        retries=0
+        while [ $retries -lt 5 ]; do
+          git pull --rebase
+          git push
+          [[ $? == 0 ]] && break  (( retries++ ));
+        done
+        exit $?

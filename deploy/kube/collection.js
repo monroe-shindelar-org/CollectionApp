@@ -126,4 +126,4 @@ const collection = [
     cm
 ]
 
-std.write(collection,`manifests/sunny/collection.yaml`, {format: std.Format.YAMLStream});
+std.write(collection,`manifests/collection/collection.yaml`, {format: std.Format.YAMLStream});

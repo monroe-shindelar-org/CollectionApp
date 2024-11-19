@@ -23,3 +23,6 @@ jobs:
         uses: ./.github/actions/generate_manifest
         with:
           version: ${{ steps.build_and_publish.outputs.version }}
+
+      - name: Push Manifest
+        uses: ./.github/actions/push_manifest

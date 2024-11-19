@@ -7,14 +7,7 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Checkout Deploy Repo
-      uses: actions/checkout@v3
-      with:
-        repository: monroeshindelar/kubernetes-manifests
-        path: "./kubernetes-manifests"
-        ssh-key: ""
-        ssh-known-hosts: "github.com"
-        ssh-strict: false
+
 
     - name: Install JKCFG
       shell: bash
