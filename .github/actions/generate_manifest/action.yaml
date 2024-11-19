@@ -26,4 +26,4 @@ runs:
     - name: Generate
       shell: bash
       run: |
-        ./jk run deploy/kube/collection.js -o deploy/kube -f $file -p version=${{ inputs.version }}
+        ./jk run deploy/kube/collection.js -o deploy/kube -p version=${{ inputs.version }}
