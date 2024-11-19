@@ -2,6 +2,8 @@ import * as std from '@jkcfg/std';
 import * as param from '@jkcfg/std/param';
 import * as k8s from '@jkcfg/kubernetes/api';
 
+const dbPort = param.Number('dbPort', 5432);
+const psqlReplicas = param.Number('psqlReplicas', 1);
 const servicePort = param.Number('servicePort', 8080);
 const replicas = param.Number('replicas', 0);
 const version = param.String ('version', '');
@@ -46,7 +48,7 @@ const ingress = {
             certResolver: 'porkbun'
         }
     }
-}
+};
 
 const service = new k8s.core.v1.Service(appName + '-svc', {
     metadata: {
@@ -62,7 +64,7 @@ const service = new k8s.core.v1.Service(appName + '-svc', {
         }],
         type: 'ClusterIP'
     }
-})
+});
 
 const deployment = new k8s.apps.v1.Deployment(appName, {
     metadata: {
@@ -102,7 +104,66 @@ const deployment = new k8s.apps.v1.Deployment(appName, {
     }
 });
 
-const pvc = new k8s.core.v1.PersistentVolumeClaim(appName + '-pvc', {
+const psql = new k8s.apps.v1.Deployment(appName + '-psql', {
+    metadata: {
+        labels: labels,
+        namespace: namespace,
+    },
+    spec: {
+        replicas: psqlReplicas,
+        selector: {
+            matchLabels: labels
+        },
+        template: {
+            metadata: {
+                labels: labels
+            },
+            spec: {
+                containers: [
+                    {
+                        name: appName + '-psql',
+                        image: 'postgres:latest',
+                        imagePullPolicy: 'IfNotPresent',
+                        ports: [
+                            {
+                                containerPort: dbPort,
+                                protocol: 'TCP'
+                            }
+                        ],
+                        envFrom: [
+                            {
+                                configMapRef: {
+                                    name: appName + '-psql-cm'
+                                }
+                            },
+                            {
+                                secretRef: {
+                                    name: appName + '-psql-secret'
+                                }
+                            }
+                        ],
+                        volumeMounts: [
+                            {
+                                mountPath: '/var/lib/postgresql/data',
+                                name: appName + '-psql-data'
+                            }
+                        ]
+                    }
+                ],
+                volumes: [
+                    {
+                        name: appName + '-psql-data',
+                        PersistentVolumeClaim: {
+                            claimName: appName + '-psql'
+                        }
+                    }
+                ]
+            }
+        }
+    }
+});
+
+const pvc = new k8s.core.v1.PersistentVolumeClaim(appName + '-psql', {
     metadata: {
         labels: labels,
         namespace: namespace,
@@ -115,9 +176,9 @@ const pvc = new k8s.core.v1.PersistentVolumeClaim(appName + '-pvc', {
             }
         }
     }
-})
+});
 
-const cm = new k8s.core.v1.ConfigMap(appName + '-cm', {
+const cmService = new k8s.core.v1.ConfigMap(appName + '-cm', {
     metadata: {
         labels: labels,
         namespace: namespace
@@ -125,14 +186,26 @@ const cm = new k8s.core.v1.ConfigMap(appName + '-cm', {
     data: {
         TEST: '1'
     }
-})
+});
+
+const cmDb = new k8s.core.v1.ConfigMap(appName + 'psql-cm', {
+    metadata: {
+        labels: labels,
+        namespace: namespace
+    },
+    data: {
+        POSTGRES_USER: 'postgres'
+    }
+});
 
 const collection = [
     deployment,
+    psql,
     service,
     ingress,
     pvc,
-    cm
+    cmService,
+    cmDb
 ]
 
 std.write(collection,`manifests/collection/collection.yaml`, {format: std.Format.YAMLStream});
