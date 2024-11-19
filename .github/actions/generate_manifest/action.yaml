@@ -19,7 +19,7 @@ runs:
     - name: Install JKCFG
       shell: bash
       run: |
-        curl -Lo jk https://github.com/jkcfg/jk/releases/download/0.4.0/jk-linux-${{ runner.arch.lowercase }}
+        curl -Lo jk https://github.com/jkcfg/jk/releases/download/0.4.0/jk-linux-amd64
         chmod +x jk
         yarn install --cwd deploy/kube
 
