@@ -7,6 +7,7 @@ runs:
       uses: actions/checkout@v4
       with:
         repository: monroeshindelar/kubernetes-manifests
+        path: "./kubernetes-manifests"
         ssh-key: ""
         ssh-known-hosts: "github.com"
         ssh-strict: false
@@ -14,7 +15,7 @@ runs:
     - name: Push
       shell: bash
       run: |
-        cp -r ./deploy/kube/manifests/* ./kubernetes-manifests
+        cp -r ./deploy/kube/manifests/* ./kubernetes-manifests/
         cd ./kubernetes-manifests
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
