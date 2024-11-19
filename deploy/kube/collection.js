@@ -82,6 +82,7 @@ const deployment = new k8s.apps.v1.Deployment(appName, {
                         }
                     ],
                     image: image + ':' + version,
+                    name: appName,
                     imagePullPolicy: 'IfNotPresent',
                     ports: [{
                         containerPort: servicePort,
