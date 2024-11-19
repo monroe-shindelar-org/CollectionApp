@@ -26,7 +26,7 @@ const namespace = "collection";
 const ingress = {
     metadata: {
         labels: ingressLabels,
-        namespace: namespace
+        namespace: namespace,
         name: appName + '-ingress',
     },
     kind: 'IngressRoute',
