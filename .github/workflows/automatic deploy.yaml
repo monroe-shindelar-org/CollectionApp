@@ -26,3 +26,5 @@ jobs:
 
       - name: Push Manifest
         uses: ./.github/actions/push_manifest
+        with:
+          repo_access_token: ${{ secrets.REPO_ACCESS_TOKEN }}
