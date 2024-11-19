@@ -10,8 +10,8 @@ runs:
     - name: Checkout Deploy Repo
       uses: actions/checkout@v3
       with:
-        repository: monroe-shindelar-org/k8s-deploy
-        path: "./k8s_deploy"
+        repository: monroeshindelar/kubernetes-manifests
+        path: "./kubernetes-manifests"
         ssh-key: ""
         ssh-known-hosts: "github.com"
         ssh-strict: false
@@ -19,11 +19,11 @@ runs:
     - name: Install JKCFG
       shell: bash
       run: |
-        curl -Lo jk https://github.com/jkcfg/jk/releases/download/0.4.0/jk-darwin-${{ runner.arch.lowercase }}
+        curl -Lo jk https://github.com/jkcfg/jk/releases/download/0.4.0/jk-linux-${{ runner.arch.lowercase }}
         chmod +x jk
         yarn install --cwd deploy/kube
 
     - name: Generate
       shell: bash
       run: |
-        ./jk run deploy/kube/collection.js -o deploy/kube -p version=${{ inputs.version }}
+        ./jk run deploy/kube/collection.js -o deploy/kube -f deploy/kube/params/sunny.yaml -p version=${{ inputs.version }}
