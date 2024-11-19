@@ -17,6 +17,7 @@ runs:
       run: |
         cp -r ./deploy/kube/manifests/* ./kubernetes-manifests/
         cd ./kubernetes-manifests
+        ls -al
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add --A
