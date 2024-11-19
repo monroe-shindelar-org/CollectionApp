@@ -1,0 +1,16 @@
+{
+  "name": "collection-jk",
+  "version": "0.0.1",
+  "description": "",
+  "main": "collection.js.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Monroe Shindelar",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@jkcfg/kubernetes": "^0.5.1",
+    "@jkcfg/std": "^0.3.0"
+  },
+  "private": false
+}

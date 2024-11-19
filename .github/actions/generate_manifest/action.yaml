@@ -21,6 +21,7 @@
         run: |
           curl -Lo jk https://github.com/jkcfg/jk/releases/download/0.4.0/jk-darwin-${{ runner.arch.lowercase }}
           chmod +x jk
+          yarn install --cwd deploy/kube
 
       - name: Generate
         shell: bash
