@@ -27,8 +27,8 @@ const ingress = {
     metadata: {
         labels: ingressLabels,
         namespace: namespace
+        name: appName + '-ingress',
     },
-    name: appName + '-ingress',
     kind: 'IngressRoute',
     apiVersion: 'traefik.io/v1alpha1',
     spec: {
