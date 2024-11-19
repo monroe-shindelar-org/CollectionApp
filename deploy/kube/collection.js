@@ -72,23 +72,28 @@ const deployment = new k8s.apps.v1.Deployment(appName, {
     spec: {
         replicas: replicas,
         template: {
+            metadata: {
+                labels: labels
+            },
             spec: {
-                containers: [{
-                    envFrom: [
-                        {
-                            configMapRef: {
-                                name: appName + '-cm'
+                containers: [
+                    {
+                        envFrom: [
+                            {
+                                configMapRef: {
+                                    name: appName + '-cm'
+                                }
                             }
-                        }
-                    ],
-                    image: image + ':' + version,
-                    name: appName,
-                    imagePullPolicy: 'IfNotPresent',
-                    ports: [{
-                        containerPort: servicePort,
-                        protocol: 'TCP'
-                    }],
-                }]
+                        ],
+                        image: image + ':' + version,
+                        name: appName,
+                        imagePullPolicy: 'IfNotPresent',
+                        ports: [{
+                            containerPort: servicePort,
+                            protocol: 'TCP'
+                        }],
+                    }
+                ]
             }
         }  
     }
