@@ -6,7 +6,7 @@ const appName = 'collection';
 const image = "monroeshindelar/collection";
 const namespace = "collection";
 
-const dbHost = param.String('dbHost', 'jdbc:postgresql://' + appName + '-svc.' + namespace + '.svc.cluster.local');
+const dbHost = param.String('dbHost', 'jdbc:postgresql://' + appName + '-svc.' + namespace + '.svc.cluster.local/collection');
 const dbPort = param.Number('dbPort', 5432);
 const psqlReplicas = param.Number('psqlReplicas', 1);
 const servicePort = param.Number('servicePort', 8080);
