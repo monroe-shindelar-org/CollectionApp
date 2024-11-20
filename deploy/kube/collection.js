@@ -2,16 +2,17 @@ import * as std from '@jkcfg/std';
 import * as param from '@jkcfg/std/param';
 import * as k8s from '@jkcfg/kubernetes/api';
 
+const appName = 'collection';
+const image = "monroeshindelar/collection";
+const namespace = "collection";
+
+const dbHost = param.String('dbHost', 'jdbc:postgresql://' + appName + '-svc.' + namespace + '.svc.cluster.local');
 const dbPort = param.Number('dbPort', 5432);
 const psqlReplicas = param.Number('psqlReplicas', 1);
 const servicePort = param.Number('servicePort', 8080);
 const replicas = param.Number('replicas', 0);
 const version = param.String ('version', '');
 const url = param.String('url', '');
-
-
-const appName = 'collection';
-const image = "monroeshindelar/collection";
 
 const ingressLabels = {
     app: appName,
@@ -22,8 +23,6 @@ const ingressLabels = {
 const labels = {
     app: appName
 };
-
-const namespace = "collection";
 
 const ingress = {
     metadata: {
@@ -56,12 +55,20 @@ const service = new k8s.core.v1.Service(appName + '-svc', {
         namespace: namespace,
     },
     spec: {
-        ports: [{
-            name: 'service',
-            port: servicePort,
-            protocol: 'TCP',
-            targetPort: servicePort
-        }],
+        ports: [
+            {
+                name: 'service',
+                port: servicePort,
+                protocol: 'TCP',
+                targetPort: servicePort
+            },
+            {
+                name: 'db',
+                port: dbPort,
+                protocol: 'TCP',
+                targetPort: dbPort
+            }
+        ],
         type: 'ClusterIP'
     }
 });
@@ -184,7 +191,7 @@ const cmService = new k8s.core.v1.ConfigMap(appName + '-cm', {
         namespace: namespace
     },
     data: {
-        TEST: '1'
+        POSTGRES_HOST: dbHost
     }
 });
 
@@ -206,6 +213,6 @@ const collection = [
     pvc,
     cmService,
     cmDb
-]
+];
 
 std.write(collection,`manifests/collection/collection.yaml`, {format: std.Format.YAMLStream});
