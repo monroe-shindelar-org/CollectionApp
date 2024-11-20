@@ -70,6 +70,9 @@ const service = new k8s.core.v1.Service(appName + '-svc', {
             }
         ],
         type: 'ClusterIP'
+    },
+    selector: {
+        app: appName
     }
 });
 
