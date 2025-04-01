@@ -58,7 +58,8 @@ public class CardController {
     }
 
     @PostMapping("/ygo/refreshDb")
-    public void refreshDatabase() throws IOException {
+    public boolean  refreshDatabase() throws IOException {
         this.cardService.refreshDatabase();
+        return true;
     }
 }
