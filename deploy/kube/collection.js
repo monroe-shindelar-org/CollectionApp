@@ -174,6 +174,7 @@ const psql = new k8s.apps.v1.Deployment(appName + '-psql', {
                         volumeMounts: [
                             {
                                 mountPath: '/var/lib/postgresql/data',
+                                subPath: 'data'
                                 name: appName + '-psql-data'
                             }
                         ]
