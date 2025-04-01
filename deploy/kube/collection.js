@@ -194,7 +194,7 @@ const psql = new k8s.apps.v1.Deployment(appName + '-psql', {
 
 const pvc = new k8s.core.v1.PersistentVolumeClaim(appName + '-psql', {
     metadata: {
-        labels: labels,
+        labels: labels-psql,
         namespace: namespace,
     },
     spec: {
@@ -231,6 +231,7 @@ const collection = [
     deployment,
     psql,
     service,
+    service-psql,
     ingress,
     pvc,
     cmService,
