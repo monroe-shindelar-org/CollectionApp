@@ -141,7 +141,7 @@ const psql = new k8s.apps.v1.Deployment(appName + '-psql', {
     spec: {
         replicas: psqlReplicas,
         selector: {
-            matchLabels: labels
+            matchLabels: labelsPsql
         },
         template: {
             metadata: {
