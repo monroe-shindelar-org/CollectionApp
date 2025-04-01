@@ -24,6 +24,10 @@ const labels = {
     app: appName
 };
 
+const labels-psql = {
+    app: appName + '-psql'
+}
+
 const ingress = {
     metadata: {
         labels: ingressLabels,
@@ -61,7 +65,22 @@ const service = new k8s.core.v1.Service(appName + '-svc', {
                 port: servicePort,
                 protocol: 'TCP',
                 targetPort: servicePort
-            },
+            }
+        ],
+        type: 'ClusterIP'
+    },
+    selector: {
+        app: appName
+    }
+});
+
+const service-psql = new k8s.core.v1.Service(appName + '-svc-psql', {
+    metadata: {
+        labels: labels-psql,
+        namespace: namespace,
+    },
+    spec: {
+        ports: [
             {
                 name: 'db',
                 port: dbPort,
@@ -72,7 +91,7 @@ const service = new k8s.core.v1.Service(appName + '-svc', {
         type: 'ClusterIP'
     },
     selector: {
-        app: appName
+        app: appName + '-psql'
     }
 });
 
@@ -126,7 +145,7 @@ const psql = new k8s.apps.v1.Deployment(appName + '-psql', {
         },
         template: {
             metadata: {
-                labels: labels
+                labels: labels-psql
             },
             spec: {
                 containers: [
@@ -163,7 +182,7 @@ const psql = new k8s.apps.v1.Deployment(appName + '-psql', {
                 volumes: [
                     {
                         name: appName + '-psql-data',
-                        PersistentVolumeClaim: {
+                        persistentVolumeClaim: {
                             claimName: appName + '-psql'
                         }
                     }
