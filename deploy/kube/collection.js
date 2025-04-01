@@ -135,7 +135,7 @@ const deployment = new k8s.apps.v1.Deployment(appName, {
 
 const psql = new k8s.apps.v1.Deployment(appName + '-psql', {
     metadata: {
-        labels: labels,
+        labels: labelsPsql,
         namespace: namespace,
     },
     spec: {
