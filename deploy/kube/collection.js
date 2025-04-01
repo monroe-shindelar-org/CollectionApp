@@ -18,15 +18,15 @@ const ingressLabels = {
     app: appName,
     'app.kubernetes.io/instance': 'traefik-networking',
     'app.kubernetes.io/name': 'traefik'
-}
+};
 
 const labels = {
     app: appName
 };
 
-const labels-psql = {
+const labelsPsql = {
     app: appName + '-psql'
-}
+};
 
 const ingress = {
     metadata: {
@@ -74,9 +74,9 @@ const service = new k8s.core.v1.Service(appName + '-svc', {
     }
 });
 
-const service-psql = new k8s.core.v1.Service(appName + '-svc-psql', {
+const servicePsql = new k8s.core.v1.Service(appName + '-svc-psql', {
     metadata: {
-        labels: labels-psql,
+        labels: labelsPsql,
         namespace: namespace,
     },
     spec: {
@@ -145,7 +145,7 @@ const psql = new k8s.apps.v1.Deployment(appName + '-psql', {
         },
         template: {
             metadata: {
-                labels: labels-psql
+                labels: labelsPsql
             },
             spec: {
                 containers: [
@@ -194,7 +194,7 @@ const psql = new k8s.apps.v1.Deployment(appName + '-psql', {
 
 const pvc = new k8s.core.v1.PersistentVolumeClaim(appName + '-psql', {
     metadata: {
-        labels: labels-psql,
+        labels: labelsPsql,
         namespace: namespace,
     },
     spec: {
@@ -231,7 +231,7 @@ const collection = [
     deployment,
     psql,
     service,
-    service-psql,
+    servicePsql,
     ingress,
     pvc,
     cmService,
