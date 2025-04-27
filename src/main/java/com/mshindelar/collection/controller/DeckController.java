@@ -15,7 +15,6 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/decks")
-@CrossOrigin(origins = "https://collection.jevn.sex")
 public class DeckController {
     private Logger LOGGER = LoggerFactory.getLogger(DeckController.class);
 

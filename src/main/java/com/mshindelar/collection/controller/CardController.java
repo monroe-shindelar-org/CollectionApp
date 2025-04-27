@@ -17,7 +17,6 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/cards")
-@CrossOrigin(origins = "https://collection.jevn.sex")
 public class CardController {
     @Autowired
     private CardService cardService;
