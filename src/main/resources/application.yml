@@ -23,6 +23,9 @@ spring:
   servlet:
     multipart:
       enabled: true
+server:
+  servlet:
+    contextPath: /api
 logging:
   level:
     root: info
