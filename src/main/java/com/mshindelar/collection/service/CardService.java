@@ -4,6 +4,7 @@ import com.YGOPRODeck.YGOPRODeckApiClient.model.MiscCardInfoDto;
 import com.YGOPRODeck.YGOPRODeckApiClient.model.YGOPRODeckCardDto;
 import com.mshindelar.collection.exception.NoSuchCardException;
 import com.mshindelar.collection.model.card.Card;
+import com.mshindelar.collection.model.card.CardImage;
 import com.mshindelar.collection.model.card.Print;
 import com.mshindelar.collection.model.card.ygo.YGOCard;
 import com.mshindelar.collection.db.filter.AbstractFilter;
@@ -51,13 +52,15 @@ public class CardService {
         return this.cardRepository.findDistinctTypeAsc();
     }
 
-    public List<String> getUniqueRaces() {
-        return this.cardRepository.findUniqueRaceAsc();
+    public List<String> getUniqueRaces(String type) {
+        return this.cardRepository.findUniqueRaceByTypeAsc(type);
     }
 
     public List<String> getUniqueArchetypes() {
         return this.cardRepository.findUniqueArchetypeAsc();
     }
+
+    public List<Card> getCards() { return this.cardRepository.findAll(); }
 
     public Card getCard(String id) {
         return cardRepository.findById(id).orElse(null);
@@ -91,6 +94,19 @@ public class CardService {
                     .toList();
 
             card.setPrints(prints);
+        }
+
+        if (dto.getCardImages() != null) {
+            List<CardImage> images = dto.getCardImages().stream()
+                    .map(i -> new CardImage(
+                            i.getId(),
+                            card,
+                            i.getImageUrl(),
+                            i.getSmallUrl(),
+                            i.getCroppedUrl()))
+                    .toList();
+
+            card.setImages(images);
         }
 
         if (dto.getMiscInfo() != null && dto.getMiscInfo().getFirst() != null) {

@@ -11,6 +11,7 @@ public class CardFilter extends Filter {
     public CardFilter() {
         this.setEntity(Card.class);
     }
+
     public CardFilter(CardField field, FilterOperator operator, Object value) {
         super(field.getName(), operator, value, null, null, Card.class);
     }

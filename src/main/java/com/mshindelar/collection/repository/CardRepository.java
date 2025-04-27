@@ -4,6 +4,7 @@ import com.mshindelar.collection.model.card.Card;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -17,4 +18,7 @@ public interface CardRepository extends JpaRepository<Card, String>, JpaSpecific
 
     @Query("SELECT DISTINCT c.archetype FROM Card c ORDER BY c.archetype ASC")
     List<String> findUniqueArchetypeAsc();
+
+    @Query("SELECT DISTINCT c.race FROM Card c WHERE c.type LIKE %:type% ORDER BY c.race ASC")
+    List<String> findUniqueRaceByTypeAsc(@Param("type") String type);
 }

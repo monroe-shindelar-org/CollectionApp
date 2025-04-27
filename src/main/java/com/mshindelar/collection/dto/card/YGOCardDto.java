@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -21,10 +22,9 @@ public class YGOCardDto extends CardDto {
     private String description;
     private int attack;
     private int defense;
-
     private int scale;
-
     private int linkValue;
+    private List<CardImageDto> images;
 
     @Override
     public boolean equals(Object o) {

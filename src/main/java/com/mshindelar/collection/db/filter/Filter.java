@@ -1,6 +1,5 @@
 package com.mshindelar.collection.db.filter;
 
-import com.mshindelar.collection.db.filter.collection.ObjectFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -3,6 +3,7 @@ package com.mshindelar.collection.model.card.ygo;
 import com.YGOPRODeck.YGOPRODeckApiClient.model.Attribute;
 import com.mshindelar.collection.dto.card.YGOCardDto;
 import com.mshindelar.collection.model.card.Card;
+import com.mshindelar.collection.model.card.CardImage;
 import com.mshindelar.collection.model.card.Print;
 import jakarta.persistence.*;
 import lombok.*;
@@ -44,6 +45,8 @@ public class YGOCard extends Card {
     private boolean hasEffect;
     @OneToMany(mappedBy = "card", cascade = CascadeType.MERGE)
     private List<Print> prints;
+    @OneToMany(mappedBy = "card", cascade = CascadeType.MERGE)
+    private List<CardImage> images;
 
     @Override
     public YGOCardDto convertToDto(ModelMapper modelMapper) {

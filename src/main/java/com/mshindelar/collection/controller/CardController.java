@@ -17,13 +17,21 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/cards")
+@CrossOrigin(origins = "https://collection.jevn.sex")
 public class CardController {
     @Autowired
     private CardService cardService;
     @Autowired
     private ModelMapper modelMapper;
 
-    @GetMapping("/filter")
+    @GetMapping
+    public List<CardDto> getCards() {
+        return this.cardService.getCards().stream()
+                .map(card -> card.convertToDto(modelMapper))
+                .toList();
+    }
+
+    @PostMapping("/filter")
     public List<CardDto> getFilteredCards(@RequestBody CardFilterChain filterChain) {
         try {
             return this.cardService.getCards(filterChain.toFilter()).stream().map(card ->
@@ -39,13 +47,13 @@ public class CardController {
     }
 
     @GetMapping("/ygo/race")
-    public List<String> getUniqueRaces() {
-        return this.cardService.getUniqueTypes();
+    public List<String> getUniqueRaces(@RequestParam String type) {
+        return this.cardService.getUniqueRaces(type);
     }
 
     @GetMapping("/ygo/archetype")
     public List<String> getUniqueArchetypes() {
-        return this.cardService.getUniqueTypes();
+        return this.cardService.getUniqueArchetypes();
     }
 
     @GetMapping("/ygo/allUnique")
@@ -62,4 +70,6 @@ public class CardController {
         this.cardService.refreshDatabase();
         return true;
     }
+
+
 }
